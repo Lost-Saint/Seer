@@ -13,7 +13,7 @@ android {
 
   defaultConfig {
     applicationId = "gg.firmament.seer"
-    minSdk = 24
+    minSdk = 26
     targetSdk = 34
     versionCode = 1
     versionName = "1.0"
@@ -35,6 +35,7 @@ android {
       isMinifyEnabled = true
       isShrinkResources = true
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        signingConfig = signingConfigs.getByName("debug")
     }
   }
   compileOptions {
@@ -68,6 +69,8 @@ dependencies {
   implementation(libs.leakCanary)
   // okio
   implementation(libs.bundles.okio)
+  //jsoup
+  implementation(libs.jsoup)
   // hilt
   implementation(libs.hilt.android)
   implementation(libs.androidx.hilt.navigation.compose)
