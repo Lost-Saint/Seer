@@ -1,3 +1,27 @@
 <resources>
-    <string name="app_name">Seer</string>
+    <string name="app_name" translatable="false">Seer</string>
+
+    <!--Error-->
+    <string name="error_invalid_reference">Invalid Reference</string>
+    <string name="error_invalid_reference_format">Invalid reference format</string>
+    <string name="error_invalid_url">Invalid URL</string>
+    <string name="error_plan_name_empty">Enter a plan name</string>
+    <string name="error_exercise_name_empty">Enter an exercise name</string>
+    <string name="error_plan_empty">Plan is empty</string>
+    <string name="error_cant_find_session">Can\'t Find Session</string>
+    <string name="error_cant_find_exercise">Can\'t Find Exercise</string>
+
+    <!--Themes-->
+    <string name="label_theme">Theme</string>
+    <string name="label_theme_system">System</string>
+    <string name="label_theme_light">Light</string>
+    <string name="label_theme_dark">Dark</string>
+
+    <!--Color Schemes-->
+    <string name="label_color_palettes">Color Palettes</string>
+    <string name="label_color_scheme_default">Default</string>
+    <string name="label_color_scheme_dynamic">Dynamic</string>
+    <string name="label_color_scheme_serene">Serene</string>
+    <string name="label_color_scheme_zestful">Zestful</string>
+    <string name="label_color_scheme_twilight">Twilight</string>
 </resources>
