@@ -77,6 +77,7 @@ dependencies {
 
     // crash handler
     implementation(libs.customActivityOnCrash)
+    implementation(libs.leakCanary)
     // okio
     implementation(libs.bundles.okio)
     // hilt
