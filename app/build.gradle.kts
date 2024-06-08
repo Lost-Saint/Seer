@@ -38,13 +38,7 @@ android {
 			signingConfig = signingConfigs.getByName("debug")
 		}
 	}
-	allprojects {
-		gradle.projectsEvaluated {
-			tasks.withType<JavaCompile> {
-				options.compilerArgs.addAll(arrayOf("-parameters", "-Xlint:deprecation"))
-			}
-		}
-	}
+	
 	compileOptions {
 		isCoreLibraryDesugaringEnabled = true
 		sourceCompatibility = JavaVersion.VERSION_1_8
