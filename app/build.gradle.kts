@@ -13,16 +13,13 @@ android {
 
 	defaultConfig {
 		applicationId = "gg.firmament.seer"
-		minSdk = 26
+		minSdk = 24
 		targetSdk = 34
 		versionCode = 1
 		versionName = "1.0"
 
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 		vectorDrawables { useSupportLibrary = true }
-		androidResources {
-			generateLocaleConfig = true
-		}
 	}
 
 	dependenciesInfo { includeInApk = false }
@@ -41,7 +38,15 @@ android {
 			signingConfig = signingConfigs.getByName("debug")
 		}
 	}
+	allprojects {
+		gradle.projectsEvaluated {
+			tasks.withType<JavaCompile> {
+				options.compilerArgs.addAll(arrayOf("-parameters", "-Xlint:deprecation"))
+			}
+		}
+	}
 	compileOptions {
+		isCoreLibraryDesugaringEnabled = true
 		sourceCompatibility = JavaVersion.VERSION_1_8
 		targetCompatibility = JavaVersion.VERSION_1_8
 	}
@@ -52,6 +57,9 @@ android {
 }
 
 dependencies {
+
+	coreLibraryDesugaring(libs.desugar)
+
 	implementation(libs.androidx.core.ktx)
 
 	implementation(libs.bundles.lifecycle)
