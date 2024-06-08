@@ -8,9 +8,9 @@ package gg.firmament.seer.epub.domain.models
  * @param body The body of the chapter.
  */
 data class EpubChapter(
-    val absPath: String,
-    val title: String,
-    val body: String
+	val absPath: String,
+	val title: String,
+	val body: String
 )
 //{
 //    init {

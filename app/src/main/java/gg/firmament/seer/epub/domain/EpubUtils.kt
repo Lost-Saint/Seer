@@ -1,5 +1,10 @@
 package gg.firmament.seer.epub.domain
 
+import org.w3c.dom.Document
+import org.w3c.dom.Element
+import org.w3c.dom.Node
+import org.w3c.dom.NodeList
+import org.xml.sax.InputSource
 import java.io.File
 import java.io.InputStream
 import java.net.URLDecoder
@@ -7,36 +12,31 @@ import java.util.zip.ZipInputStream
 import javax.xml.parsers.DocumentBuilderFactory
 import kotlin.io.path.invariantSeparatorsPathString
 import org.jsoup.nodes.Node as JsoupNode
-import org.w3c.dom.Document
-import org.w3c.dom.Element
-import org.w3c.dom.Node
-import org.w3c.dom.NodeList
-import org.xml.sax.InputSource
 
 fun parseXMLText(text: String): Document? =
-    text
-        .reader()
-        .runCatching {
-          DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(InputSource(this))
-        }
-        .getOrNull()
+	text
+		.reader()
+		.runCatching {
+			DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(InputSource(this))
+		}
+		.getOrNull()
 
 fun parseXMLFile(inputSteam: InputStream): Document? =
-    DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputSteam)
+	DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputSteam)
 
 fun parseXMLFile(byteArray: ByteArray): Document? = parseXMLFile(byteArray.inputStream())
 
 val String.decodedURL: String
-  get() = URLDecoder.decode(this, "UTF-8")
+	get() = URLDecoder.decode(this, "UTF-8")
 
 fun String.asFileName(): String = this.replace("/", "_")
 
 fun String.hrefAbsolutePath(hrefRootPath: File): String {
-  return File(hrefRootPath, this)
-      .canonicalFile
-      .toPath()
-      .invariantSeparatorsPathString
-      .removePrefix("/")
+	return File(hrefRootPath, this)
+		.canonicalFile
+		.toPath()
+		.invariantSeparatorsPathString
+		.removePrefix("/")
 }
 
 fun ZipInputStream.entries() = generateSequence { nextEntry }
@@ -48,19 +48,19 @@ fun Node.selectFirstChildTag(tag: String) = childElements.find { it.tagName == t
 fun Node.selectChildTag(tag: String) = childElements.filter { it.tagName == tag }
 
 fun Node.getAttributeValue(attribute: String): String? =
-    attributes?.getNamedItem(attribute)?.textContent
+	attributes?.getNamedItem(attribute)?.textContent
 
 val NodeList.elements
-  get() = (0..length).asSequence().mapNotNull { item(it) as? Element }
+	get() = (0..length).asSequence().mapNotNull { item(it) as? Element }
 val Node.childElements
-  get() = childNodes.elements
+	get() = childNodes.elements
 
 fun JsoupNode.nextSiblingNodes(): List<JsoupNode> {
-  val siblings = mutableListOf<JsoupNode>()
-  var nextSibling = nextSibling()
-  while (nextSibling != null) {
-    siblings.add(nextSibling)
-    nextSibling = nextSibling.nextSibling()
-  }
-  return siblings
+	val siblings = mutableListOf<JsoupNode>()
+	var nextSibling = nextSibling()
+	while (nextSibling != null) {
+		siblings.add(nextSibling)
+		nextSibling = nextSibling.nextSibling()
+	}
+	return siblings
 }

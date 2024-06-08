@@ -7,21 +7,21 @@ package gg.firmament.seer.epub.domain.models
  * @param image The image data.
  */
 data class EpubImage(val absPath: String, val image: ByteArray) {
-    override fun equals(other: Any?):Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
+		if (javaClass != other?.javaClass) return false
 
-        other as EpubImage
+		other as EpubImage
 
-        if (absPath != other.absPath) return false
-        if (!image.contentEquals(other.image)) return false
+		if (absPath != other.absPath) return false
+		if (!image.contentEquals(other.image)) return false
 
-        return true
-    }
+		return true
+	}
 
-    override fun hashCode(): Int {
-        var result = absPath.hashCode()
-        result = 31 * result + image.contentHashCode()
-        return result
-    }
+	override fun hashCode(): Int {
+		var result = absPath.hashCode()
+		result = 31 * result + image.contentHashCode()
+		return result
+	}
 }

@@ -14,26 +14,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import gg.firmament.seer.ui.theme.SeerTheme
 
 class MainActivity : ComponentActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    enableEdgeToEdge()
-    setContent {
-      SeerTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-          Greeting(name = "Saint", modifier = Modifier.padding(innerPadding))
-        }
-      }
-    }
-  }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		enableEdgeToEdge()
+		setContent {
+			SeerTheme {
+				Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+					Greeting(name = "Saint", modifier = Modifier.padding(innerPadding))
+				}
+			}
+		}
+	}
 }
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-  Text(text = "Hello $name!", modifier = modifier)
+	Text(text = "Hello $name!", modifier = modifier)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-  SeerTheme { Greeting("Saint") }
+	SeerTheme { Greeting("Saint") }
 }

@@ -13,7 +13,10 @@ import javax.inject.Singleton
 @Module
 class MainModule {
 
-  @Provides fun provideAppContext(@ApplicationContext context: Context) = context
+	@Provides
+	fun provideAppContext(@ApplicationContext context: Context) = context
 
-  @Singleton @Provides fun provideEpubParser() = EpubParser()
+	@Singleton
+	@Provides
+	fun provideEpubParser() = EpubParser()
 }

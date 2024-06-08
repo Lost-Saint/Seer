@@ -14,11 +14,11 @@ import android.graphics.Bitmap
  * @param images The list of images in the book.
  */
 data class EpubBook(
-    val fileName: String,
-    val title: String,
-    val author: String,
-    val language: String,
-    val coverImage: Bitmap?,
-    val chapters: List<EpubChapter>,
-    val images: List<EpubImage>
+	val fileName: String,
+	val title: String,
+	val author: String,
+	val language: String,
+	val coverImage: Bitmap?,
+	val chapters: List<EpubChapter>,
+	val images: List<EpubImage>
 )
