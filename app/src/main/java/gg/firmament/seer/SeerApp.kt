@@ -15,21 +15,27 @@ import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-
 @HiltAndroidApp
-class SeerApp : Application(), ImageLoaderFactory {
+class SeerApp :
+	Application(),
+	ImageLoaderFactory {
 	// TODO Delete when https://github.com/google/dagger/issues/3601 is resolved.
 	@Inject
 	@ApplicationContext
 	lateinit var context: Context
+
 	override fun onCreate() {
 		super.onCreate()
-		CaocConfig.Builder.create().restartActivity(MainActivity::class.java).apply()
+		CaocConfig.Builder
+			.create()
+			.restartActivity(MainActivity::class.java)
+			.apply()
 	}
 
 	override fun newImageLoader(): ImageLoader {
 		val coilOkhttpClient =
-			OkHttpClient.Builder()
+			OkHttpClient
+				.Builder()
 				.connectTimeout(60, TimeUnit.SECONDS)
 				.writeTimeout(60, TimeUnit.SECONDS)
 				.readTimeout(60, TimeUnit.SECONDS)
@@ -39,11 +45,19 @@ class SeerApp : Application(), ImageLoaderFactory {
 			.newBuilder()
 			.memoryCachePolicy(CachePolicy.ENABLED)
 			.memoryCache {
-				MemoryCache.Builder(this).maxSizePercent(0.25).strongReferencesEnabled(true).build()
-			}
-			.diskCachePolicy(CachePolicy.ENABLED)
-			.diskCache { DiskCache.Builder().maxSizePercent(0.05).directory(cacheDir).build() }
-			.okHttpClient(coilOkhttpClient)
+				MemoryCache
+					.Builder(this)
+					.maxSizePercent(0.25)
+					.strongReferencesEnabled(true)
+					.build()
+			}.diskCachePolicy(CachePolicy.ENABLED)
+			.diskCache {
+				DiskCache
+					.Builder()
+					.maxSizePercent(0.05)
+					.directory(cacheDir)
+					.build()
+			}.okHttpClient(coilOkhttpClient)
 			.logger(DebugLogger())
 			.build()
 	}
