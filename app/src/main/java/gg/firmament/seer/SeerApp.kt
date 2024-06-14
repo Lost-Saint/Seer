@@ -54,7 +54,7 @@ class SeerApp :
 			.diskCache {
 				DiskCache
 					.Builder()
-					.maxSizePercent(0.05)
+					.maxSizePercent(0.03)
 					.directory(cacheDir)
 					.build()
 			}.okHttpClient(coilOkhttpClient)
