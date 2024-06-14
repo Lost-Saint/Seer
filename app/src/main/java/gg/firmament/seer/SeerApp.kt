@@ -38,7 +38,7 @@ class SeerApp :
 				.Builder()
 				.connectTimeout(60, TimeUnit.SECONDS)
 				.writeTimeout(60, TimeUnit.SECONDS)
-				.readTimeout(60, TimeUnit.SECONDS)
+				.readTimeout(100, TimeUnit.SECONDS)
 				.build()
 
 		return ImageLoader(this)
