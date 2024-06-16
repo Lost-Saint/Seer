@@ -44,7 +44,7 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/Theme.Seer"
-		tools:targetApi="34">
+		tools:ignore="UnusedAttribute">
 		<activity
 			android:name=".MainActivity"
 			android:exported="true"

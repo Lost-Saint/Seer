@@ -1,11 +1,14 @@
 package gg.firmament.seer.ui.navigation
 
+import androidx.compose.ui.graphics.vector.ImageVector
 import gg.firmament.seer.R
 
 sealed class BottomBarScreen(
 	val route: String,
 	val title: Int,
 	val icon: Int,
+//	val selectedIcon: ImageVector,
+//	val unselectedIcon: ImageVector,
 ) {
 	data object Home : BottomBarScreen(
 		route = "home",
