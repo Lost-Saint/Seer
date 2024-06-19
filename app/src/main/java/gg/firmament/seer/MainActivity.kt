@@ -16,11 +16,9 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,7 +35,6 @@ data class BottomNavigationItem(
 	val selectedIcon: ImageVector,
 	val unselectedIcon: ImageVector,
 	val hasNews: Boolean,
-	val badgeCount: Int? = null
 )
 
 class MainActivity : ComponentActivity() {
@@ -58,7 +55,6 @@ class MainActivity : ComponentActivity() {
 						selectedIcon = Icons.Filled.Email,
 						unselectedIcon = Icons.Outlined.Email,
 						hasNews = false,
-						badgeCount = 45
 					),
 					BottomNavigationItem(
 						title = "Settings",
@@ -70,52 +66,46 @@ class MainActivity : ComponentActivity() {
 				var selectedItemIndex by rememberSaveable {
 					mutableIntStateOf(0)
 				}
-				Surface(
+
+				Scaffold(
 					modifier = Modifier.fillMaxSize(),
-					color = MaterialTheme.colorScheme.background
-				) {
-					Scaffold(
-						bottomBar = {
-							NavigationBar {
-								items.forEachIndexed { index, item ->
-									NavigationBarItem(
-										selected = selectedItemIndex == index,
-										onClick = {
-											selectedItemIndex = index
-											// navController.navigate(item.title)
-										},
-										label = {
-											Text(text = item.title)
-										},
-										alwaysShowLabel = false,
-										icon = {
-											BadgedBox(
-												badge = {
-													if (item.badgeCount != null) {
-														Badge {
-															Text(text = item.badgeCount.toString())
-														}
-													} else if (item.hasNews) {
-														Badge()
-													}
+					bottomBar = {
+						NavigationBar {
+							items.forEachIndexed { index, item ->
+								NavigationRailItem(
+									selected = selectedItemIndex == index,
+									onClick = {
+										selectedItemIndex = index
+										// navController.navigate(item.title)
+									},
+									label = {
+										Text(text = item.title)
+									},
+									alwaysShowLabel = false,
+									icon = {
+										BadgedBox(
+											badge = {
+												if (item.hasNews) {
+													Badge()
 												}
-											) {
-												Icon(
-													imageVector = if (index == selectedItemIndex) {
-														item.selectedIcon
-													} else item.unselectedIcon,
-													contentDescription = item.title
-												)
-											}
+											},
+										) {
+											Icon(
+												imageVector = if (index == selectedItemIndex) {
+													item.selectedIcon
+												} else item.unselectedIcon,
+												contentDescription = item.title,
+											)
 										}
-									)
-								}
+									},
+									modifier = Modifier.weight(1F),
+								)
 							}
 						}
-					) { innerPadding ->
-						Greeting(name = "Saint", modifier = Modifier.padding(innerPadding))
-					}
-
+					},
+				) {
+					innerPadding ->
+					Greeting(name = "Saint", modifier = Modifier.padding(innerPadding))
 				}
 			}
 		}
