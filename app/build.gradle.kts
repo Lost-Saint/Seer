@@ -67,7 +67,6 @@ dependencies {
 	debugImplementation(libs.bundles.compose.debug)
 	// coil
 	implementation(libs.bundles.coil)
-
 	// crash handler
 	implementation(libs.customActivityOnCrash)
 	implementation(libs.leakCanary)

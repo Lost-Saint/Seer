@@ -103,8 +103,7 @@ class MainActivity : ComponentActivity() {
 							}
 						}
 					},
-				) {
-					innerPadding ->
+				) { innerPadding ->
 					Greeting(name = "Saint", modifier = Modifier.padding(innerPadding))
 				}
 			}
