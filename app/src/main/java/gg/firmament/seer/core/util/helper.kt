@@ -15,7 +15,11 @@ import kotlin.math.floor
 import kotlin.math.log10
 import kotlin.math.pow
 
+/**
+ * A collection of utility functions.
+ * */
 object helper {
+
 	/**
 	 * Formats a number into a more readable format with a suffix representing its magnitude.
 	 * For example, 1000 becomes "1k", 1000000 becomes "1M", etc.
@@ -48,6 +52,27 @@ object helper {
 		val intent = Intent(Intent.ACTION_VIEW, uri)
 		try {
 			context.startActivity(intent)
+		} catch (exc: ActivityNotFoundException) {
+			exc.printStackTrace()
+			context.getString(R.string.error).toToast(context)
+		}
+	}
+
+	/**
+	 * Opens an email client with the specified email address and subject.
+	 *
+	 * @param context The context to use.
+	 * @param email The email address to send the email to.
+	 * @param subject The subject of the email.
+	 */
+	fun openEmail(context: Context, email: String, subject: String) {
+		val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+			data = Uri.parse("mailto:")
+			putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+			putExtra(Intent.EXTRA_SUBJECT, subject)
+		}
+		try {
+			context.startActivity(emailIntent)
 		} catch (exc: ActivityNotFoundException) {
 			exc.printStackTrace()
 			context.getString(R.string.error).toToast(context)
