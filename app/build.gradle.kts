@@ -9,12 +9,12 @@ plugins {
 
 android {
 	namespace = "gg.firmament.seer"
-	compileSdk = 34
+	compileSdk = 35
 
 	defaultConfig {
 		applicationId = "gg.firmament.seer"
 		minSdk = 24
-		targetSdk = 34
+		targetSdk = 35
 		versionCode = 1
 		versionName = "1.0.0"
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
