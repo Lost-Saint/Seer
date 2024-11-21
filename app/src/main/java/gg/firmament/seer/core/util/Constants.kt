@@ -2,7 +2,7 @@ package gg.firmament.seer.core.util
 
 object Constants {
 	/** Name of database file. */
-	const val DATABASE_NAME = "myne.db"
+	const val DATABASE_NAME = "seer.db"
 
 	/** Epub Mime Type. */
 	const val EPUB_MIME_TYPE = "application/epub+zip"

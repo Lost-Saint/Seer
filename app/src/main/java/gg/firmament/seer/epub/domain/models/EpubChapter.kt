@@ -1,5 +1,9 @@
 package gg.firmament.seer.epub.domain.models
 
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
+
 /**
  * Represents a chapter in an epub book.
  *
@@ -7,14 +11,11 @@ package gg.firmament.seer.epub.domain.models
  * @param title The title of the chapter.
  * @param body The body of the chapter.
  */
-data class EpubChapter(
-	val absPath: String,
-	val title: String,
-	val body: String
+@OptIn(ExperimentalSerializationApi::class)
+@Serializable
+data class EpubChapter @OptIn(ExperimentalSerializationApi::class) constructor(
+	@ProtoNumber(1) val chapterId: String,
+	@ProtoNumber(2) val absPath: String,
+	@ProtoNumber(3) val title: String,
+	@ProtoNumber(4) val body: String
 )
-//{
-//    init {
-//        require(title.isNotBlank()) { "Title cannot be blank" }
-//        require(body.isNotBlank()) { "Body cannot be blank" }
-//    }
-//}

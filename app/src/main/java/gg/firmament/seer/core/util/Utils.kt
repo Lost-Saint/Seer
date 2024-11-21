@@ -17,8 +17,8 @@ import kotlin.math.pow
 
 /**
  * A collection of utility functions.
- * */
-object helper {
+ */
+object Utils {
 
 	/**
 	 * Formats a number into a more readable format with a suffix representing its magnitude.

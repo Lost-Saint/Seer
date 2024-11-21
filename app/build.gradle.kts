@@ -21,6 +21,10 @@ android {
 		vectorDrawables { useSupportLibrary = true }
 	}
 
+	ksp {
+		arg("room.schemaLocation", "$projectDir/schemas")
+	}
+
 	dependenciesInfo { includeInApk = false }
 
 	buildTypes {
@@ -43,7 +47,9 @@ android {
 		sourceCompatibility = JavaVersion.VERSION_17
 		targetCompatibility = JavaVersion.VERSION_17
 	}
-	kotlinOptions { jvmTarget = "17" }
+	kotlinOptions {
+		jvmTarget = "17"
+	}
 	buildFeatures { compose = true }
 	lint { abortOnError = true }
 	packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
@@ -61,6 +67,7 @@ dependencies {
 	implementation(libs.androidx.activity.compose)
 
 	implementation(libs.kotlinx.serialization.json)
+	implementation(libs.kotlinx.serialization.protobuf)
 
 	implementation(platform(libs.androidx.compose.bom))
 	implementation(libs.bundles.compose)

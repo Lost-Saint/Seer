@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import gg.firmament.seer.epub.data.SeerDatabase
 import gg.firmament.seer.epub.domain.EpubParser
 import javax.inject.Singleton
 
@@ -18,5 +19,18 @@ class MainModule {
 
 	@Singleton
 	@Provides
-	fun provideEpubParser() = EpubParser()
+	fun provideSeerDatabase(@ApplicationContext context: Context) =
+		SeerDatabase.getInstance(context)
+
+	@Provides
+	fun provideLibraryDao(seerDatabase: SeerDatabase) = seerDatabase.getLibraryDao()
+
+	@Provides
+	fun provideReaderDao(seerDatabase: SeerDatabase) = seerDatabase.getReaderDao()
+
+
+	@Singleton
+	@Provides
+	fun provideEpubParser(@ApplicationContext context: Context) = EpubParser(context)
+
 }
