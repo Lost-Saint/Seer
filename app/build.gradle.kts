@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
 	alias(libs.plugins.android.application)
 	alias(libs.plugins.jetbrains.kotlin.android)
@@ -5,6 +8,12 @@ plugins {
 	alias(libs.plugins.kotlin.serialization)
 	alias(libs.plugins.ksp)
 	alias(libs.plugins.hilt)
+}
+
+val keystoreProperties = Properties()
+val keystorePropertiesFile: File = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+	keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
 android {
@@ -15,8 +24,8 @@ android {
 		applicationId = "gg.firmament.seer"
 		minSdk = 24
 		targetSdk = 35
-		versionCode = 1
-		versionName = "1.0.0"
+		versionCode = project.property("version_code")?.toString()?.toInt() ?: 1
+		versionName = project.property("version_name")?.toString() ?: "1.0.0"
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 		vectorDrawables { useSupportLibrary = true }
 	}
@@ -25,7 +34,23 @@ android {
 		arg("room.schemaLocation", "$projectDir/schemas")
 	}
 
-	dependenciesInfo { includeInApk = false }
+	dependenciesInfo {
+		includeInApk = false
+		includeInBundle = false
+	}
+
+
+	signingConfigs {
+		create("release") {
+			keyAlias = keystoreProperties["keyAlias"].toString()
+			keyPassword = keystoreProperties["keyPassword"].toString()
+			storeFile =
+				if (keystoreProperties["storeFile"] != null) keystoreProperties["storeFile"]?.let {
+					file(it)
+				} else null
+			storePassword = keystoreProperties["storePassword"].toString()
+		}
+	}
 
 	buildTypes {
 		debug {
@@ -39,6 +64,7 @@ android {
 			isShrinkResources = true
 			signingConfig = signingConfigs.getByName("debug")
 			proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+			signingConfig = signingConfigs.getByName("release")
 		}
 	}
 	
