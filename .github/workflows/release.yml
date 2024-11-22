@@ -5,6 +5,8 @@ on:
   release:
     types:
       - published
+    tags:
+      - "v*.*.*"
 jobs:
   deployAndroid:
     permissions: write-all
