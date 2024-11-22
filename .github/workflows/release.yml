@@ -41,6 +41,6 @@ jobs:
       - name: 🤖🚀 Upload to GitHub release
         uses: AButler/upload-release-assets@v3.0
         with:
-          files: 'app/build/outputs/apk/release/*.apk'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-		      release-tag: ${{  github.ref_name }}
+          files: "app/build/outputs/apk/release/*.apk"
+          release-tag: ${{ github.ref_name }}
