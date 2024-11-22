@@ -41,7 +41,7 @@ jobs:
         run: |
           ./gradlew app:assembleRelease
       - name: 🤖🚀 Upload to GitHub release
-        uses: AButler/upload-release-assets@v3.0
+        uses: AButler/upload-release-assets@v2.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           files: "app/build/outputs/apk/release/*.apk"
